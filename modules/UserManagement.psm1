@@ -33,3 +33,34 @@ function modGetAllADUser {
     # Return the list of AD users
     return $users
 }
+
+function modGetADUser {
+    [CmdletBinding()]
+    param($username)
+    if (-not $username) {
+        return
+    }
+    # Retrieve AD user by username
+    $user = Get-ADUser -Identity $username -Properties * | ConvertTo-Json
+
+    # Return user information
+    return $user
+}
+
+function createLocalUser {
+    [CmdletBinding()]
+    param(
+        [string]$username,
+        [string]$password
+    )
+    
+    if (-not $username -or -not $password) {
+        Write-Host "Username and password are required."
+        return
+    }
+
+    # Create a new local user
+    New-LocalUser -Name $username -Password (ConvertTo-SecureString $password -AsPlainText -Force) -FullName $username -Description "Created by script"
+    
+    Write-Host "Local user '$username' created successfully."
+}

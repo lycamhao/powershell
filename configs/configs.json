@@ -1,7 +1,7 @@
 {
-    "dataPath" : ".\\data",
-    "configPath" : ".\\configs",
-    "logPath" : ".\\logs",
-    "tempPath" : ".\\temp",
-    "modulePath" : ".\\modules"
+    "dataPath" : "..\\data",
+    "configPath" : "..\\configs",
+    "logPath" : "..\\logs",
+    "tempPath" : "..\\temp",
+    "modulePath" : "..\\modules"
 }

@@ -47,26 +47,23 @@ function modGetADUser {
     return $user
 }
 
-function createLocalUser {
+function modCreateLocalUser {
     [CmdletBinding()]
     param(
         [string]$username,
-        [string]$password
+        [SecureString] $password
     )
     
-    if (-not $username -or -not $password) {
-        Write-Host "Username and password are required."
-        return
-    }
-
     # Create a new local user
-    New-LocalUser -Name $username -Password (ConvertTo-SecureString $password -AsPlainText -Force) -FullName $username -Description "Create from Script"
-    
-    Write-Host "Local user '$username' created successfully."
+    try {
+        New-LocalUser -Name $username -Password (ConvertTo-SecureString $password -AsPlainText -Force) -FullName $username -Description "Create from Script"
+        #cmWriteLog -logType "Info" -logFile "UserManagement" -logMessage "User <$username> created successfully."
+    }
+    catch {
+        cmWriteLog -logType "Error" -logFile "UserManagement" -logMessage "User <$username> failed to create with error $_"
+    }
 }
 
 function createLocalUserFromCsv {
 
 }
-
-function create

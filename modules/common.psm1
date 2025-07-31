@@ -7,12 +7,12 @@ function cmGetExecutionPolicy {
     Write-Host "Current Execution Policy: $executionPolicy"
 }
 
-function cmReadFromCsv {
-
+function cmReadCsv {
+    $csvPath = 
 }
 
-function cmWriteToCsv {
-
+function cmWriteCsv {
+    
 }
 
 function cmWriteTxtLog {

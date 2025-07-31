@@ -36,7 +36,7 @@ function modGetAllADUser {
 
 function modGetADUser {
     [CmdletBinding()]
-    param($username)
+    param([string]$username)
     if (-not $username) {
         return
     }
@@ -60,7 +60,13 @@ function createLocalUser {
     }
 
     # Create a new local user
-    New-LocalUser -Name $username -Password (ConvertTo-SecureString $password -AsPlainText -Force) -FullName $username -Description "Created by script"
+    New-LocalUser -Name $username -Password (ConvertTo-SecureString $password -AsPlainText -Force) -FullName $username -Description "Create from Script"
     
     Write-Host "Local user '$username' created successfully."
 }
+
+function createLocalUserFromCsv {
+
+}
+
+function create

@@ -1,0 +1,7 @@
+{
+    "dataPath" : ".\\data",
+    "configPath" : ".\\configs",
+    "logPath" : ".\\logs",
+    "tempPath" : ".\\temp",
+    "modulePath" : ".\\modules"
+}

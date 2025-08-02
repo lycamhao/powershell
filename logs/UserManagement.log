@@ -1,19 +1,21 @@
-2025-08-01 00:39:37 [Info] User <test> created successfully.
-2025-08-01 00:39:46 [Info] User <test> created successfully.
-2025-08-01 00:40:56 [Info] User <test> created successfully.
-2025-08-01 00:42:45 [Info] User <test> created successfully.
-2025-08-01 00:43:19 [Info] User <test> created successfully.
-2025-08-01 00:44:15 [Info] User <test> created successfully.
-2025-08-01 00:44:20 [Info] User <test> created successfully.
-2025-08-01 00:48:16 [Info] User <test> created successfully.
-2025-08-01 00:48:57 [Info] User <test> created successfully.
-2025-08-01 00:49:59 [Info] User <test> created successfully.
-2025-08-01 00:50:10 [Info] User <test> created successfully.
-2025-08-01 00:50:12 [Info] User <test> created successfully.
-2025-08-01 00:50:13 [Info] User <test> created successfully.
-2025-08-01 00:50:13 [Info] User <test> created successfully.
-2025-08-01 00:50:14 [Info] User <test> created successfully.
-2025-08-01 00:50:14 [Info] User <test> created successfully.
-2025-08-01 00:50:15 [Info] User <test> created successfully.
-2025-08-01 00:50:15 [Info] User <test> created successfully.
-2025-08-01 00:50:17 [Info] User <test> created successfully.
+2025-08-02 23:02:58 [Error] User <test> failed to create with error User test already exists.
+2025-08-02 23:04:16 [Info] User <test> created successfully.
+2025-08-02 23:04:50 [Error] User <test> failed to create with error: User test already exists.
+2025-08-02 23:10:38 [Error] User <test> failed to create with error: User test already exists.
+2025-08-02 23:21:53 [Error] Create local User from CSV file path failed because csvFilePath not provided.
+2025-08-02 23:23:00 [Error] Create local User from CSV file path failed because csvFilePath not provided.
+2025-08-02 23:26:01 [Error] Create local User from CSV file path failed because csvFilePath not provided.
+2025-08-02 23:31:27 [Error] Create local User from CSV file path failed because csvFilePath not provided.
+2025-08-02 23:31:37 [Error] Create local User from CSV file path failed because csvFilePath not provided.
+2025-08-02 23:50:37 [Info] modCreateLocalUser: user <test1> created successfully.
+2025-08-02 23:50:37 [Info] modCreateLocalUser: user <test2> created successfully.
+2025-08-02 23:50:57 [Error] modCreateLocalUser: user <test1> failed to create with error: User test1 already exists.
+2025-08-02 23:50:57 [Error] modCreateLocalUser: user <test2> failed to create with error: User test2 already exists.
+2025-08-02 23:51:16 [Error] modCreateLocalUser: user <test1> failed to create with error: User test1 already exists.
+2025-08-02 23:51:16 [Error] modCreateLocalUser: user <test2> failed to create with error: User test2 already exists.
+2025-08-02 23:57:15 [Error] modCreateLocalUserFromCsv: csvFilePath not provided.
+2025-08-02 23:58:07 [Error] modCreateLocalUserFromCsv: csvFilePath not provided or path not found.
+2025-08-03 00:05:52 [Error] modCreateLocalUserFromCsv: csvFilePath not provided or path not found.
+2025-08-03 00:06:08 [Error] modCreateLocalUserFromCsv: csvFilePath not provided or path not found.
+2025-08-03 00:06:46 [Error] modCreateLocalUser: user <test1> failed to create with error: User test1 already exists.
+2025-08-03 00:06:46 [Error] modCreateLocalUser: user <test2> failed to create with error: User test2 already exists.

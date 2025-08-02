@@ -9,7 +9,12 @@ function cmGetExecutionPolicy {
 }
 
 function cmReadCsv {
-     
+    [CmdletBinding()]
+    param (
+        [string]$csvFilePath
+    )
+    $result = Import-Csv -Path $csvFilePath -ErrorAction Stop
+    return $result
 }
 
 function cmWriteCsv {

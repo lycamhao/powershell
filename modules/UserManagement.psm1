@@ -51,19 +51,46 @@ function modCreateLocalUser {
     [CmdletBinding()]
     param(
         [string]$username,
-        [SecureString] $password
+        [SecureString]$password,
+        [string]$description = "Created from Script"
     )
     
     # Create a new local user
     try {
-        New-LocalUser -Name $username -Password (ConvertTo-SecureString $password -AsPlainText -Force) -FullName $username -Description "Create from Script"
-        #cmWriteLog -logType "Info" -logFile "UserManagement" -logMessage "User <$username> created successfully."
-    }
+        New-LocalUser -Name $username -Password (ConvertTo-SecureString $password -AsPlainText -Force) -FullName $username -Description description -ErrorAction Stop 
+        cmWriteLog -logType "Info" -logFile "UserManagement" -logMessage "modCreateLocalUser: user <$username> created successfully."
+    } 
     catch {
-        cmWriteLog -logType "Error" -logFile "UserManagement" -logMessage "User <$username> failed to create with error $_"
+        Write-Host $_.Exception.Message
+        cmWriteLog -logType "Error" -logFile "UserManagement" -logMessage "modCreateLocalUser: user <$username> failed to create with error: $_"
     }
 }
 
-function createLocalUserFromCsv {
+function modCreateLocalUserFromCsv {
+    [CmdletBinding()]
+    param (
+        [string]$userListFile
+    )
 
+    if (-not $userListFile -or -not (Test-Path $userListFile) -or $userListFile -eq $null -or $userListFile -eq "") {
+        cmWriteLog -logType "Error" -logFile "UserManagement" -logMessage "modCreateLocalUserFromCsv: csvFilePath not provided or path not found."
+        return
+    }
+    $csv = cmReadCsv -csvFilePath $userListFile
+    foreach ( $user in $csv ) {
+        $username = $user.username
+        $password = ConvertTo-SecureString $user.password -AsPlainText -Force
+        $description = $user.description
+        modCreateLocalUser -username $username -password $password -description $description
+    }
+}
+
+function modCreateADUser {
+    [CmdletBinding()]
+    param(
+        [string]$username,
+        [SecureString]$password,
+        [string]$description = "Created from Script",
+        [string]$ou = "OU=Users,DC=example,DC=com"
+    )
 }

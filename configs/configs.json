@@ -1,7 +1,35 @@
 {
-    "dataPath" : "..\\data",
-    "configPath" : "..\\configs",
-    "logPath" : "..\\logs",
-    "tempPath" : "..\\temp",
-    "modulePath" : "..\\modules"
+    "paths": {
+        "data": "..\\data",
+        "config": "..\\configs",
+        "log": "..\\logs",
+        "temp": "..\\temp",
+        "module": "..\\modules",
+        "test": "..\\tests"
+    },
+    "mail": {
+        "smtpServer": "email.cathay-ins.com.vn",
+        "smtpPort": 465,
+        "useSSL": true,
+        "fromAddress": "",
+        "userName": "sp_cathayins@cathay-ins.com.vn",
+        "password": "MAA3ADIAMAAyADUAQABDAGEAdABoAGEAeQBpAG4AcwA="
+    },
+    "sftp": {
+        "host": "",
+        "user": "",
+        "password": "",
+        "port": 22,
+        "path": ""
+    },
+    "adUserAttr" : {
+        "name": "cn",
+        "displayName": "displayName",
+        "email": "mail",
+        "phone": "telephoneNumber",
+        "mobile": "mobile",
+        "department": "department",
+        "title": "title",
+        "manager": "manager"
+    }
 }

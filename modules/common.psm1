@@ -13,7 +13,8 @@ function cmReadCsv {
     param (
         [string]$csvFilePath
     )
-    $result = Import-Csv -Path $csvFilePath -ErrorAction Stop
+    $result = Import-Csv -Path 
+     -ErrorAction Stop
     return $result
 }
 
@@ -30,10 +31,10 @@ function cmWriteLog {
     )
     switch ($logType) {
         "Error" { 
-            Add-Content -Path "$($configs.logPath)\$logFile.log" -Value "$(Get-Date -Format 'yyyy-MM-dd HH:mm:ss') [Error] $logMessage"
+            Add-Content -Path "$($configs.paths.log)\$logFile.log" -Value "$(Get-Date -Format 'yyyy-MM-dd HH:mm:ss') [Error] $logMessage"
         }
         "Info" { 
-            Add-Content -Path "$($configs.logPath)\$logFile.log" -Value "$(Get-Date -Format 'yyyy-MM-dd HH:mm:ss') [Info] $logMessage"
+            Add-Content -Path "$($configs.paths.log)\$logFile.log" -Value "$(Get-Date -Format 'yyyy-MM-dd HH:mm:ss') [Info] $logMessage"
         }
         Default {
             return
@@ -43,11 +44,15 @@ function cmWriteLog {
 
 function cmBase64Encrypt {
     param (
-        $string
+    [string]$string
     )
     if (-not $string) {
-        return $null
+        cmWriteLog $logType "Error" $logFile "$($configs.logPath)\$logFile.log" $logMessage "No string provided to encrypt, please try again!!!"
+        return
     }
+    $encryptedString = [System.Text.Encoding]::Unicode.GetBytes($string)
+    $encryptedString = [System.Convert]::ToBase64String($encryptedString)
+    Write-Host $encryptedString
 }
 
 function cmBase64Decrypt {

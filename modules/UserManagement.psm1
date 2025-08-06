@@ -94,3 +94,11 @@ function modCreateADUser {
         [string]$ou = "OU=Users,DC=example,DC=com"
     )
 }
+
+function modGetAllADUser {
+    [CmdletBinding()]
+    param(
+        [string]$ou = "OU=Users,DC=example,DC=com",
+        [string]$csvOutput = $false
+    )
+}

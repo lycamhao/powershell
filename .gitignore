@@ -1,0 +1,49 @@
+# User-specific files
+*.ps1.user
+*.ps1~*
+*.ps1.tmp
+*.ps1.bak
+
+# PowerShell transcript logs
+PowerShell_transcript*
+
+# JSON config files containing secrets
+configs.json
+mail.json
+sftp.json
+*.secrets.json
+*.secret.json
+*.xml
+*.clixml
+*.key
+*.pem
+*.pfx
+
+# CSV output
+*.csv
+
+# Log files
+*.log
+
+# Temp files
+*.tmp
+*.temp
+
+# Backup files
+*.bak
+*.old
+
+# Windows
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+$RECYCLE.BIN/
+
+# VSCode
+.vscode/
+
+# =====================
+# Git / Merge files
+# =====================
+*.orig
+*.rej

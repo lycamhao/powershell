@@ -1,4 +1,3 @@
-$configs = Get-Content -Path "$PSScriptRoot\..\configs\configs.json" | ConvertFrom-Json
 function cmGetPSModule {
     Write-Host "Current Powershell Version: $($PSVersionTable.PSVersion)"
 }
@@ -60,4 +59,19 @@ function cmBase64Decrypt {
         $string
     )
     
+}
+function cmConnectToRemoteAD {
+    # [CmdletBinding()]
+    param (
+        [string]$adServer,
+        [string]$adUser
+    )
+    if (-not $adServer -or -not $adServer) {
+        Write-Host "AD server or username empty."
+        return
+    }
+    $session = New-PSSession -ComputerName $adServer -Credential $adUser
+    Invoke-command { import-module activedirectory } -session $session
+    Export-PSSession -session $session -commandname *-AD* -outputmodule RemAD -allowclobber -Force
+    Import-Module RemAD
 }

@@ -7,20 +7,9 @@
         "module": "..\\modules",
         "test": "..\\tests"
     },
-    "mail": {
-        "smtpServer": "email.cathay-ins.com.vn",
-        "smtpPort": 465,
-        "useSSL": true,
-        "fromAddress": "",
-        "userName": "sp_cathayins@cathay-ins.com.vn",
-        "password": "MAA3ADIAMAAyADUAQABDAGEAdABoAGEAeQBpAG4AcwA="
-    },
-    "sftp": {
-        "host": "",
-        "user": "",
-        "password": "",
-        "port": 22,
-        "path": ""
+    "adServer": {
+        "host": "192.168.10.244",
+        "user": "administrator"
     },
     "adUserAttr" : {
         "name": "cn",

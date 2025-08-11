@@ -1,4 +1,5 @@
 Import-Module "$PSScriptRoot\..\modules\common.psm1" -Force
+$configs = Get-Content -Path "$PSScriptRoot\..\configs\configs.json" | ConvertFrom-Json
 function modGetAllLocalUser {
     [CmdletBinding()]
     param()
@@ -98,7 +99,16 @@ function modCreateADUser {
 function modGetAllADUser {
     [CmdletBinding()]
     param(
-        [string]$ou = "OU=Users,DC=example,DC=com",
         [string]$csvOutput = $false
     )
+    users = Get-ADUser -Filter *
+    if ($csvOutput) {
+        $users | Export-Csv -Path $configs.paths.data -NoTypeInformation -Encoding UTF8
+    } else {
+        $users
+    }
+}
+
+function modGetADUser {
+    
 }

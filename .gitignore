@@ -8,9 +8,9 @@
 PowerShell_transcript*
 
 # JSON config files containing secrets
-configs.json
-mail.json
-sftp.json
+configs/configs.json
+configs/mail.json
+configs/sftp.json
 *.secrets.json
 *.secret.json
 *.xml

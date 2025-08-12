@@ -60,6 +60,7 @@ function cmBase64Decrypt {
     )
     
 }
+
 function cmConnectToRemoteAD {
     # [CmdletBinding()]
     param (

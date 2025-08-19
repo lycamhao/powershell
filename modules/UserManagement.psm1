@@ -1,14 +1,9 @@
-Import-Module "$PSScriptRoot\common.psm1"
-$script:configs = Get-Content -Path "..\configs\configs.json" | ConvertFrom-Json
+Import-Module "common.psm1"
 
 function modGetAllLocalUser {
     [CmdletBinding()]
     param()
-
-    # Retrieve all users from the system
     $users = Get-LocalUser 
-
-    # Return the list of users
     return $users
 }
 
@@ -18,10 +13,7 @@ function modGetLocalUser {
     if (-not $username) {
         return
     }
-    # Retrieve user by username
     $user = Get-LocalUser | Where-Object { $_.Name -eq $username } | ConvertTo-Json
-
-    # Return user information
     return $user
 }
 
@@ -31,10 +23,7 @@ function modGetADUser {
     if (-not $username) {
         return
     }
-    # Retrieve AD user by username
     $user = Get-ADUser -Identity $username -Properties * | ConvertTo-Json
-
-    # Return user information
     return $user
 }
 
@@ -56,26 +45,6 @@ function modCreateLocalUser {
         cmWriteLog -logType "Error" -logFile "UserManagement" -logMessage "modCreateLocalUser: user <$username> failed to create with error: $_"
     }
 }
-
-function modCreateLocalUserFromCsv {
-    [CmdletBinding()]
-    param (
-        [string]$userListFile
-    )
-
-    if (-not $userListFile -or -not (Test-Path $userListFile) -or $userListFile -eq $null -or $userListFile -eq "") {
-        cmWriteLog -logType "Error" -logFile "UserManagement" -logMessage "modCreateLocalUserFromCsv: csvFilePath not provided or path not found."
-        return
-    }
-    $csv = cmReadCsv -csvFilePath $userListFile
-    foreach ( $user in $csv ) {
-        $username = $user.username
-        $password = ConvertTo-SecureString $user.password -AsPlainText -Force
-        $description = $user.description
-        modCreateLocalUser -username $username -password $password -description $description
-    }
-}
-
 function modCreateADUser {
     [CmdletBinding()]
     param(
@@ -111,4 +80,14 @@ function modGetADUser {
     } else {
         $user
     }
+}
+
+function newADUserFromCsv {
+    [CmdletBinding()]
+    param (
+        [string]$csvFile
+    )
+    $users = Import-Csv -Path $csvFile
+    $header = Import-Csv -Path $csvFile -First 1
+    $header
 }

@@ -62,7 +62,7 @@ function cmBase64Decrypt {
 }
 
 function cmConnectToRemoteAD {
-    # [CmdletBinding()]
+    [CmdletBinding()]
     param (
         [string]$adServer,
         [string]$adUser
@@ -74,5 +74,28 @@ function cmConnectToRemoteAD {
     $session = New-PSSession -ComputerName $adServer -Credential $adUser
     Invoke-command { import-module activedirectory } -session $session
     Export-PSSession -session $session -commandname *-AD* -outputmodule RemAD -allowclobber -Force
-    Import-Module RemAD
+    Import-Module RemAD -Force
+}
+
+function cmLoadJsonConfig {
+    param (
+        [string]$configPath,
+        [string]$basePath = $PSScriptRoot
+    )
+
+    if (-not (Test-Path $configPath)) {
+        throw "❌ Cannot find the path: $configPath"
+    }
+
+    $config = Get-Content -Path $configPath -Raw | ConvertFrom-Json
+
+    foreach ($prop in $config.PSObject.Properties) {
+        if ($prop.Value -is [string] -and $prop.Value -match "[\\/]+") {
+            if (-not [System.IO.Path]::IsPathRooted($prop.Value)) {
+                $config.$($prop.Name) = Join-Path $basePath $prop.Value
+            }
+        }
+    }
+
+    return $config
 }

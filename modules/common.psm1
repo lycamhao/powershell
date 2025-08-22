@@ -76,3 +76,36 @@ function cmConnectToRemoteAD {
     Export-PSSession -session $session -commandname *-AD* -outputmodule RemAD -allowclobber -Force
     Import-Module RemAD
 }
+
+
+function cmEncodePassowrd { param ($password)
+    $encodedPassword = [System.Text.Encoding]::Unicode.GetBytes($password)
+    $encodedPassword = [System.Convert]::ToBase64String($encodedPassword)
+    return $encodedPassword
+}
+
+
+function cmDecodePassword { param ($password)
+    $decodedPassword = [System.Convert]::FromBase64String($password)
+    $decodedPassword = [System.Text.Encoding]::Unicode.GetString($decodedPassword)
+    return $decodedPassword
+}
+
+function cmSendMail { param ($body,$from,$to,$username,$password)
+    Import-Module Send-MailKitMessage
+    $securepwd = ConvertTo-SecureString $password -AsPlainText -Force
+    $credential = [System.Management.Automation.PSCredential]::new($username, (ConvertTo-SecureString -String $password -AsPlainText -Force))
+    $mailParam = @{
+        "From" = $from
+        "To" = $to
+        "Subject" = 'Thông báo đổi mật khẩu'
+        "SMTPServer" = 'email.cathay-ins.com.vn'
+        "Port" = 465
+        "UseSecureConnectionIfAvailable" = $true
+        "HTMLBody" = $body
+        "Credential" = $credential
+        #DeliveryNotificationOption = 'OnSuccess', 'OnFailure'
+    }
+    #[System.Net.ServicePointManager]::SecurityProtocol = [System.Net.SecurityProtocolType]::SystemDefault
+    Send-MailKitMessage @mailParam
+}
